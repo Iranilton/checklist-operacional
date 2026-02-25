@@ -62,31 +62,28 @@ document.getElementById("gestao").classList.remove("hidden")
 }
 }
 
-function enviarChecklist(){
+function enviarChecklistOperador() {
+  const nome = document.getElementById("nomeOperador").value;
 
-let equipamento=document.getElementById("equipamento").value
-let obs=document.getElementById("obs").value
+  if (!nome) {
+    alert("Informe o nome do operador");
+    return;
+  }
 
-let respostas=[]
-document.querySelectorAll(".item").forEach(i=>{
-respostas.push(i.checked)
-})
+  const checklist = {
+    operador: nome,
+    data: new Date().toLocaleString()
+  };
 
-let dados=getDados()
+  // pega respostas do checklist
+  document.querySelectorAll(".item-check").forEach(item => {
+    checklist[item.name] = item.value;
+  });
 
-dados.push({
-id:Date.now(),
-operador:usuarioAtual,
-equipamento:equipamento,
-respostas:respostas,
-obs:obs,
-status:"pendente",
-intervencao:null,
-data:new Date().toLocaleString()
-})
+  // salva no navegador
+  let dados = JSON.parse(localStorage.getItem("checklists") || "[]");
+  dados.push(checklist);
+  localStorage.setItem("checklists", JSON.stringify(dados));
 
-salvarDados(dados)
-alert("Checklist enviado!")
-location.reload()
+  alert("Checklist enviado com sucesso!");
 }
-
