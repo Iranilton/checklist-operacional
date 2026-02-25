@@ -9,26 +9,33 @@
 <body>
 
 <div id="login">
-<h2>Login</h2>
 
-<select id="tipo">
+<h2>Identificação</h2>
+
+<select id="tipo" onchange="trocarTipo()">
 <option value="operador">Operador</option>
-<option value="usuario">Usuário</option>
+<option value="manutencao">Manutenção / Gestão</option>
 </select>
 
 <br><br>
 
-<input id="nomeOperador" placeholder="Nome operador">
-
-<select id="nome">
-<option value="Carlos" data-tipo="manutencao">Carlos - Manutenção</option>
-<option value="Ana" data-tipo="gestao">Ana - Gestão</option>
-</select>
-
-<br><br>
-<button onclick="entrar()">Entrar</button>
+<!-- operador -->
+<div id="loginOperador">
+<input id="nomeOperador" placeholder="Nome do operador">
 </div>
 
+<!-- manutenção -->
+<div id="loginUsuario" class="hidden">
+<input id="usuario" placeholder="Usuário"><br><br>
+<input id="senha" type="password" placeholder="Senha">
+</div>
+
+<br>
+<button onclick="entrar()">Entrar</button>
+
+</div>
+
+<!-- OPERADOR -->
 <div id="operador" class="hidden">
 <h2>Checklist</h2>
 
@@ -47,11 +54,13 @@
 <button onclick="enviarChecklist()">Enviar</button>
 </div>
 
+<!-- MANUTENÇÃO -->
 <div id="manutencao" class="hidden">
 <h2>Painel Manutenção</h2>
 <div id="listaManutencao"></div>
 </div>
 
+<!-- GESTÃO -->
 <div id="gestao" class="hidden">
 <h2>Painel Gestão</h2>
 <div id="listaGestao"></div>
