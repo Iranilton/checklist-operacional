@@ -61,3 +61,32 @@ mostrarListaGestao()
 document.getElementById("gestao").classList.remove("hidden")
 }
 }
+
+function enviarChecklist(){
+
+let equipamento=document.getElementById("equipamento").value
+let obs=document.getElementById("obs").value
+
+let respostas=[]
+document.querySelectorAll(".item").forEach(i=>{
+respostas.push(i.checked)
+})
+
+let dados=getDados()
+
+dados.push({
+id:Date.now(),
+operador:usuarioAtual,
+equipamento:equipamento,
+respostas:respostas,
+obs:obs,
+status:"pendente",
+intervencao:null,
+data:new Date().toLocaleString()
+})
+
+salvarDados(dados)
+alert("Checklist enviado!")
+location.reload()
+}
+
