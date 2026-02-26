@@ -1,130 +1,205 @@
-# ✅ Sistema de Checklist Operacional (Protótipo)
+📋 Sistema Web de Checklist Operacional (Offline)
 
-Sistema web simples para registro de checklist operacional diário com fluxo:
+Sistema web simples para checklist operacional diário de equipamentos, com validação pela manutenção, agendamento de intervenções e histórico.
 
-**Operador → Manutenção → Gestão**
+Projetado para ambiente industrial offline, rodando na rede local sem necessidade de banco de dados ou instalação complexa.
 
-Projeto desenvolvido como protótipo para ambiente industrial, permitindo registro de verificações de equipamentos e acompanhamento de intervenções.
+🎯 Objetivo
 
----
+Permitir que:
 
-## 🚀 Funcionalidades
+👷 Operadores realizem checklists diários de equipamentos
 
-### 👷 Operador
+🛠 Manutenção valide checklists e agende intervenções
 
-* Preenche checklist diário
-* Informa nome
-* Seleciona equipamento
-* Adiciona observações
-* Envia verificação
+📊 Gestão visualize histórico
 
-### 🔧 Manutenção
+📁 Dados sejam armazenados localmente sem banco de dados
 
-* Visualiza checklists pendentes
-* Confirma verificações
-* Agenda intervenções quando necessário
+⚙️ Características
 
-### 📊 Gestão
+✅ Funciona offline (rede local)
+✅ Sem banco de dados
+✅ Armazenamento local (localStorage)
+✅ Usuários importados por arquivo
+✅ Checklist por equipamento
+✅ Histórico de verificações
+✅ Agendamento de intervenção
+✅ Interface simples para uso industrial
+✅ Sistema leve e portátil
 
-* Visualiza histórico completo
-* Acompanha status das verificações
-* Consulta intervenções registradas
+👥 Perfis de Usuário
+👷 Operador (padrão)
 
----
+Informa apenas o nome
 
-## 💾 Armazenamento de Dados (Protótipo)
+Preenche checklist do equipamento
 
-Este protótipo utiliza:
+Pode registrar observações
 
-```
-LocalStorage do navegador
-```
+Envia checklist para validação
 
-Isso significa:
+🛠 Manutenção
 
-* Dados salvos no navegador do usuário
-* Não compartilhado entre computadores
-* Não requer servidor
-* Ideal para demonstração e testes
+Login com usuário e senha
 
----
+Visualiza checklists pendentes
 
-## ⚠️ Limitações do Protótipo
+Valida checklist com data
 
-* Não possui banco de dados real
-* Não salva arquivos CSV ainda
-* Não funciona como sistema multiusuário real
-* Dados podem ser apagados ao limpar o navegador
+Agenda intervenção com data
 
----
+Visualiza intervenções agendadas
 
-## 🏭 Uso previsto (futuro)
+📊 Gestão
 
-O projeto pode evoluir para:
+Login com usuário e senha
 
-* Sistema offline em rede local
-* Armazenamento em CSV ou banco de dados
-* Controle de usuários por arquivo
-* Dashboard com indicadores
-* Sistema de manutenção industrial real
+Visualiza histórico geral
 
----
+🏗 Estrutura do Projeto
+sistema-checklist/
 
-## 📁 Estrutura do Projeto
-
-```
-checklist-operacional/
-│
-├── index.html
-├── style.css
-├── script.js
-└── README.md
-```
-
----
-
-## ▶️ Como Executar
-
-### Opção 1 — Abrir localmente
-
-Abra o arquivo:
-
-```
 index.html
-```
+operador.html
+manutencao.html
+gestao.html
 
-no navegador.
+usuarios.json
+equipamentos.json
 
----
+js/
+  login.js
+  operador.js
+  manutencao.js
+  gestao.js
+  storage.js
 
-### Opção 2 — Executar via GitHub Pages
+css/
+  style.css
+📄 Arquivos de Configuração
+usuarios.json
 
-Acesse o link do projeto publicado no GitHub Pages.
+Define usuários do sistema:
 
----
+{
+  "usuarios": [
+    { "usuario": "manutencao", "senha": "123", "tipo": "manutencao" },
+    { "usuario": "gestao", "senha": "123", "tipo": "gestao" }
+  ]
+}
+equipamentos.json
 
-## 🎯 Objetivo do Projeto
+Define equipamentos e checklists:
 
-* Demonstrar fluxo de checklist operacional
-* Simular processo de manutenção industrial
-* Servir como base para sistema real offline
-* Projeto educacional e experimental
+{
+  "equipamentos": [
+    {
+      "nome": "Compressor",
+      "checklist": [
+        "Sem vazamento",
+        "Sem ruído anormal"
+      ]
+    }
+  ]
+}
+🚀 Como Executar
+Opção 1 — Servidor portátil (recomendado para indústria)
 
----
+Baixe um servidor web portátil (ex: HFS).
 
-## 📌 Melhorias Futuras
+Coloque a pasta do projeto dentro.
 
-* Exportação para CSV
-* Importação de usuários e equipamentos
-* Checklist específico por equipamento
-* Controle de permissões
-* Histórico avançado
-* Relatórios e indicadores
+Abra o endereço no navegador.
 
----
+Permite funcionamento completo com arquivos JSON.
 
-## 👨‍💻 Autor
+Opção 2 — VS Code (desenvolvimento)
 
-Projeto desenvolvido para estudo e aplicação em ambiente industrial.
+Instale extensão Live Server
 
----
+Clique com botão direito em index.html
+
+Abrir com Live Server
+
+⚠️ Não recomendado
+
+Abrir diretamente com:
+
+file://
+
+Pode bloquear leitura de arquivos JSON.
+
+💾 Armazenamento de Dados
+
+O sistema salva dados em:
+
+localStorage do navegador
+
+Inclui:
+
+checklists enviados
+
+validações
+
+intervenções agendadas
+
+histórico
+
+🔄 Fluxo do Sistema
+
+Operador acessa sistema
+
+Informa nome
+
+Preenche checklist
+
+Sistema registra como pendente
+
+Manutenção valida ou agenda intervenção
+
+Gestão acompanha histórico
+
+🔮 Melhorias Futuras (Planejadas)
+
+Exportação automática CSV
+
+Prioridade de intervenção
+
+Dashboard de indicadores
+
+Histórico por equipamento
+
+Controle de permissões
+
+Alertas de falhas críticas
+
+Sistema multiusuário em rede
+
+Persistência em arquivos CSV
+
+Interface estilo HMI industrial
+
+🏭 Uso Industrial
+
+Este sistema foi projetado para:
+
+ambientes com restrições de instalação
+
+máquinas sem acesso à internet
+
+redes internas industriais
+
+controle operacional de equipamentos
+
+📜 Licença
+
+Uso livre para estudo e adaptação.
+
+Se você quiser, no próximo passo posso te gerar também:
+
+✅ README com imagens da interface
+✅ diagrama de funcionamento do sistema
+✅ manual do operador e manutenção
+✅ guia de instalação industrial
+✅ documentação técnica do código
