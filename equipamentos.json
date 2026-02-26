@@ -1,0 +1,20 @@
+{
+  "equipamentos": [
+    {
+      "nome": "Compressor",
+      "checklist": [
+        "Sem vazamento",
+        "Sem ruído anormal",
+        "Pressão normal"
+      ]
+    },
+    {
+      "nome": "Motor",
+      "checklist": [
+        "Temperatura normal",
+        "Sem vibração",
+        "Sem cheiro de queimado"
+      ]
+    }
+  ]
+}

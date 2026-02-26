@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Sistema Checklist</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<h2>Sistema de Checklist</h2>
+
+<!-- ===== OPERADOR (PADRÃO) ===== -->
+<div id="areaOperador">
+
+<h3>Identificação do Operador</h3>
+
+<input id="nomeOperador" placeholder="Digite seu nome">
+<br><br>
+
+<button onclick="entrarOperador()">Iniciar Checklist</button>
+
+<br><br>
+<button onclick="mostrarLogin()">Login</button>
+
+</div>
+
+<!-- ===== LOGIN USUÁRIO ===== -->
+<div id="areaUsuario" style="display:none">
+
+
+<input id="usuario" placeholder="Usuário">
+<input id="senha" type="password" placeholder="Senha">
+
+<br><br>
+
+<button onclick="login()">Entrar</button>
+<button onclick="voltarOperador()">Voltar</button>
+
+</div>
+
+<script src="js/login.js"></script>
+
+</body>
+</html>
