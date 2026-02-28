@@ -1,0 +1,188 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 8px;
+    margin: 10px;
+    background-color: #f4f4f4;
+}
+
+.container {
+    background: white;
+    padding: 15px;
+    max-width: 1400px;
+    margin: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.controls {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 0px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+    border: 1px solid #ddd;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.control-group label {
+    font-weight: bold;
+    font-size: 10px;
+    color: #333;
+}
+
+.control-group select,
+.control-group input {
+    padding: 8px;
+    font-size: 9px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    min-width: 150px;
+}
+
+.btn-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+button {
+    padding: 8px 15px;
+    font-size: 9px;
+    background: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #004499;
+}
+
+button.print-btn {
+    background: #28a745;
+}
+
+button.print-btn:hover {
+    background: #218838;
+}
+
+.sheet {
+    background: white;
+    margin-top: 0px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+th,
+td {
+    border: 1px solid black;
+    padding: 1px;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+.header-table td {
+    text-align: left;
+    padding: 4px;
+    font-size: 10px;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 22px;
+    font-style: italic;
+}
+
+.bg-gray {
+    background-color: #e0e0e0;
+    font-weight: bold;
+}
+
+.title {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.note-cell {
+    text-align: left;
+    padding-left: 6px;
+    font-size: 8px;
+}
+
+.left-align {
+    text-align: left;
+    padding: 2px 4px;
+    line-height: 1.1;
+}
+
+.col-id {
+    width: 18px;
+}
+
+.col-item {
+    width: 110px;
+}
+
+.col-crit {
+    width: 160px;
+}
+
+.col-met {
+    width: 55px;
+}
+
+.col-pad {
+    width: 90px;
+}
+
+.col-turno {
+    width: 45px;
+    font-size: 7px;
+}
+
+.col-dia {
+    width: 22px;
+}
+
+.info-box {
+    background: #e8f4f8;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-left: 4px solid #0066cc;
+    font-size: 9px;
+}
+
+@media print {
+    .controls {
+        display: none;
+    }
+
+    .info-box {
+        display: none;
+    }
+
+    body {
+        margin: 0;
+    }
+
+    .container {
+        max-width: 100%;
+    }
+}

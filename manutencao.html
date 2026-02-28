@@ -1,25 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Manutenção</title>
-<link rel="stylesheet" href="css/style.css">
+
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/manutencao.css">
 </head>
 
-<body>
+<body class="pagina-manutencao">
 
-<h2>Manutenção</h2>
+<header>
+    <h1>Manutenção</h1>
+</header>
 
-<h3>Checklist Pendentes</h3>
-<div id="pendentes"></div>
+<div class="container">
 
-<hr>
+<a href="pendentes.html" class="card">
+<h2>📋 Checklist Pendentes</h2>
+<p>Visualizar itens que precisam de manutenção</p>
+</a>
 
-<h3>Intervenções Agendadas</h3>
-<div id="agendados"></div>
+<a href="agendados.html" class="card">
+<h2>🛠 Intervenções Agendadas</h2>
+<p>Ver serviços programados</p>
+</a>
 
-<script src="js/storage.js"></script>
-<script src="js/manutencao.js"></script>
+</div>
 
 </body>
 </html>

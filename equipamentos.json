@@ -1,20 +1,86 @@
 {
-  "equipamentos": [
+ 
+  "tipos": [
     {
-      "nome": "Compressor",
-      "checklist": [
-        "Sem vazamento",
-        "Sem ruído anormal",
-        "Pressão normal"
+      "id": "AC90",
+      "descricao": "Máquinas de corte AC90",
+      "modelos": [
+        {
+          "id": "A",
+          "descricao": "AC90 Série A",
+          "itensRelatorio": [
+            {"n": 1, "item": "Pressão de ar principal", "crit": "0,45 - 0,55MPa", "met": "Visual", "pad": "MED-MC-AC90-001-02"},
+            {"n": 2, "item": "Pressão da Garra A", "crit": "0,35 - 0,45MPa", "met": "Visual", "pad": "MED-MC-AC90-002-03"},
+            {"n": 3, "item": "Pressão da Garra B", "crit": "0,45 - 0,55MPa", "met": "Visual", "pad": "MED-MC-AC90-003-03"},
+            {"n": 4, "item": "Força da pressão das correias de alimentação do cabo", "crit": "0,25 - 0,35MPa", "met": "Visual", "pad": "MED-MC-AC90-004-03"},
+            {"n": 5, "item": "Força da pressão do rolo de medição", "crit": "A marca de coincidência está alinhada.", "met": "Visual", "pad": "MED-MC-AC90-006-02"},
+            {"n": 6, "item": "Verificação dos roletes de correção", "crit": "Girar sem dificuldade", "met": "Ao Toque", "pad": "MED-MC-AC90-007-02"},
+            {"n": 7, "item": "Checagem da rota do cabo", "crit": "Sem rebarbas, desgaste, quebra ou danos", "met": "Visual", "pad": "MED-MC-AC90-008-03"},
+            {"n": 8, "item": "Checagem do detetor de emendas", "crit": "Uma emenda de cabo pode ser detectada", "met": "Visual", "pad": "MED-MC-AC90-009-02"},
+            {"n": 9, "item": "Condição do detetor de emenda de cabo", "crit": "A máquina deve parar quando a emenda é detectada", "met": "Verificação", "pad": "MED-MC-AC90-010-02"},
+            {"n": 10, "item": "Condição detecção desponte lado A/B", "crit": "Detectar falha na decapagem no menor cabo", "met": "Verificação", "pad": "MED-MC-AC90-011-03"},
+            {"n": 11, "item": "Condição do contador de produto com defeito", "crit": "Contar logo após erro de desponte ou cravação", "met": "Visual", "pad": "MED-MC-AC90-012-02"},
+            {"n": 12, "item": "Condição do corte e desponte", "crit": "Não ter rebarba, filamento cortado ou marcado", "met": "Visual/Lupa", "pad": "MED-MC-AC90-013-03"},
+            {"n": 13, "item": "CFM (Verificação da forma de onda exibida)", "crit": "Dentro da tolerância da forma da onda padrão", "met": "Visual", "pad": "MED-MC-AC90-014A-02"},
+            {"n": 14, "item": "Checagem de detecção de CFM", "crit": "CFM tem que detectar o defeito nos testes", "met": "Operação", "pad": "TCC-YM-AC90-014B-00"},
+            {"n": 15, "item": "Resíduos de terminais e isolante", "crit": "Tubos de saída não devem estar obstruídos", "met": "Visual", "pad": "MED-MC-AC90-015-02"},
+            {"n": 16, "item": "Luzes do Andon", "crit": "Checar se as luzes estão funcionando", "met": "Visual", "pad": "TCC-YM-AC90-019-00"},
+            {"n": 17, "item": "Condição dos Bicos e Pintura", "crit": "Estar sem danos e com pintura boa", "met": "Visual", "pad": "TCC-YM-AC90-020-00"},
+            {"n": 18, "item": "Limpeza e organização da Máquina", "crit": "Sem poeira, resíduo de cabo ou scrap", "met": "Visual", "pad": "TCC-YM-AC90-021-00"},
+            {"n": 19, "item": "Tubo guia do cabo", "crit": "Livre de danos e sujeira", "met": "Visual", "pad": "TCC-YM-AC90-022-00"},
+            {"n": 20, "item": "Verificar polia do encoder", "crit": "Livre de sujeira", "met": "Visual", "pad": "TCC-YM-AC90-023-00"},
+            {"n": 21, "item": "Equipamentos de medição", "crit": "Zerando e dentro do prazo de calibração", "met": "Visual", "pad": "TCC-YM-AC90-024-00"},
+            {"n": 22, "item": "Proteção principal / alimentação", "crit": "Sem partes quebradas ou faltantes", "met": "Visual", "pad": "TCC-YM-AC90-025-00"},
+            {"n": 23, "item": "Botoeira de emergência", "crit": "Em boas condições / sem danos", "met": "Visual", "pad": "TCC-YM-AC90-026-00"},
+            {"n": 24, "item": "Observações Gerais", "crit": "Verificar integridade geral", "met": "Visual", "pad": "-"}
+          ]
+        },
+        {
+          "id": "D",
+          "descricao": "AC90 Série D"
+          
+        }
       ]
     },
     {
-      "nome": "Motor",
-      "checklist": [
-        "Temperatura normal",
-        "Sem vibração",
-        "Sem cheiro de queimado"
+      "id": "KOMAX",
+      "descricao": "Komax",
+      "modelos": [
+        {
+          "id": "355",
+          "descricao": "Komax 355"
+          
+        }
       ]
     }
+  ],
+
+  
+  "equipamentos": [
+    {
+      "codigo": "CA-04",
+      "nome": "AC90",
+      "tipo": "Maquina de corte",
+      "modelo": "A",
+      "ativo": "ATIVO-001"
+    },
+    
+    {
+      "codigo": "CA-05",
+      "nome": "AC90",
+      "tipo": "Maquina de corte",
+      "modelo": "D",
+      "ativo": "ATIVO-003"
+      
+    },
+    {
+      "codigo": "CA-06",
+      "nome": "AC90",
+      "tipo": "Maquina de corte",
+      "modelo": "A",
+      "ativo": "ATIVO-004"
+      
+    }
+    
   ]
 }

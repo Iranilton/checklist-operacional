@@ -1,26 +1,112 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<title>Checklist Operador</title>
-<link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checklist Operador</title>
+
+  <!-- CSS externo -->
+  <link rel="stylesheet" href="css/operador.css">
 </head>
 
 <body>
 
-<h2>Checklist Operacional</h2>
+  <div class="container">
 
-<select id="equipamento"></select>
+    <!-- Painel de Controle -->
+    <div class="controls">
+      <div class="control-group">
+        <label for="selectEquipamento">Equipamento</label>
+        <select id="selectEquipamento">
+          <option value="">-- Selecione --</option>
+        </select>
+      </div>
+      <div class="control-group">
+        <label for="inputData">Data</label>
+        <input type="date" id="inputData" />
+      </div>
+    </div>
+    
+    <!-- Mensagem informativa -->
+    <div class="info-box" id="infoBox" style="display:none;"></div>
+    
+    <!-- Sheet / Relatório -->
+    <div class="sheet">
 
-<div id="checklist"></div>
+      <datalist id="legenda">
+        <option value="-"></option>
+        <option value="O"></option>
+        <option value="X"></option>
+        <option value="*"></option>
+        <option value="(X)"></option>
+      </datalist>
 
-<textarea id="observacao" placeholder="Observações"></textarea>
+      <!-- Cabeçalho do relatório -->
+      <table class="header-table">
+        <tr>
+          <td rowspan="2" style="width: 15%;" class="logo">YAZAKI</td>
+          <td style="width: 12%;" class="bg-gray">Equipamento</td>
+          <td rowspan="2" class="title">FOLHA DE VERIFICAÇÃO DIÁRIA DE MANUTENÇÃO DE 1º NÍVEL</td>
+          <td style="width: 8%;" class="bg-gray">Máquina</td>
+          <td style="width: 10%;" id="equipCodigo">-</td>
+        </tr>
+        <tr>
+          <td id="equipTipo">-</td>
+          <td class="bg-gray">Ativo</td>
+          <td id="periodoData">-</td>
+        </tr>
+        <tr>
+          <td colspan="5" style="text-align: center;">
+            Quando houver algum item fora do especificado anotar na folha de Descrição do Problema (VIDE VERSO).
+          </td>
+        </tr>
+      </table>
 
-<br><br>
-<button onclick="enviarChecklist()">Enviar</button>
+      <!-- Container flex para tabela principal + legenda -->
+      <div class="report-wrapper">
 
-<script src="js/storage.js"></script>
-<script src="js/operador.js"></script>
+        <!-- Tabela principal -->
+        <table>
+          <thead>
+            <tr class="bg-gray">
+              <th class="col-id">Nº</th>
+              <th class="col-item">ITEM</th>
+              <th class="col-crit">CRITÉRIO</th>
+              <th class="col-met">MÉTODO</th>
+              <th class="col-pad">PADRÃO</th>
+              <th id="diaHeader">DIA</th>
+            </tr>
+          </thead>
+          <tbody id="main-body"></tbody>
+        </table>
+
+        <!-- Legenda -->
+        <table class="legend-table">
+          <tr class="bg-gray"><td colspan="2">MÉTODO DE INSPEÇÃO / LEGENDA</td></tr>
+          <tr><td>Não utilizado</td><td>—</td></tr>
+          <tr><td>Conforme</td><td>O</td></tr>
+          <tr><td>Não conforme</td><td>X</td></tr>
+          <tr><td>Aguardando correção</td><td>*</td></tr>
+          <tr><td>Corrigido</td><td>(X)</td></tr>
+          <tr><td>Manômetro</td><td>Escrever Valor</td></tr>
+        </table>
+        
+
+      </div> <!-- /report-wrapper -->
+
+    </div> <!-- /sheet -->
+
+  </div> <!-- /container -->
+
+  <!-- Menu circular para preencher células -->
+  <div id="menuCircular" class="menu-circular"></div>
+  
+  <!-- JS -->
+  <script src="js/storage.js"></script>
+  <script src="js/operador.js"></script>
+  
+
+  
 
 </body>
 </html>

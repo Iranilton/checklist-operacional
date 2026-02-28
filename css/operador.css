@@ -1,0 +1,354 @@
+/* ================= RESET GLOBAL ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ================= BODY ================= */
+body {
+  font-family: Arial, sans-serif;
+  font-size: 14px; /* aumentado (antes 8px) */
+  margin: 10px;
+  background-color: #f4f4f4;
+}
+
+/* ================= LAYOUT CONTAINER RELATÓRIO ================= */
+.container {
+  background: white;
+  padding: 15px;
+  max-width: 1400px;
+  margin: auto;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* ================= HEADINGS ================= */
+h2 {
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* ================= CONTROLS ================= */
+.controls {
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  border: 1px solid #ddd;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.control-group label {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* ================= FORMULÁRIOS ================= */
+select,
+input,
+textarea {
+  width: 100%;
+  margin-top: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.control-group select,
+.control-group input {
+  min-width: 150px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* ================= BOTÕES ================= */
+.btn-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+button {
+  padding: 10px 18px;
+  font-size: 14px;
+  background: #0066cc;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #004499;
+}
+
+/* ================= RELATÓRIO ================= */
+.sheet {
+  background: white;
+  margin-top: 20px;
+}
+
+/* ================= TABELAS ================= */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* 🔥 tabela maior e legível */
+th,
+td {
+  border: 1px solid black;
+  padding: 10px 8px;
+  text-align: center;
+  height: 45px;
+  font-size: 15px;
+}
+
+.sheet table {
+  font-size: 16px;
+}
+
+/* ================= HEADER RELATÓRIO ================= */
+.header-table td {
+  text-align: left;
+  padding: 6px;
+  font-size: 14px;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 24px;
+  font-style: italic;
+}
+
+.bg-gray {
+  background-color: #e0e0e0;
+  font-weight: bold;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.left-align {
+  text-align: left;
+  padding: 4px 6px;
+}
+
+/* ================= COLUNAS ================= */
+.col-id { width: 40px; }
+.col-item { width: 200px; }
+.col-crit { width: 260px; }
+.col-met { width: 100px; }
+.col-pad { width: 160px; }
+
+/* ================= COLUNA DIA ================= */
+.day-cell {
+  min-width: 90px;
+  height: 55px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* ================= INFO BOX ================= */
+.info-box {
+  background: #e8f4f8;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-left: 4px solid #0066cc;
+}
+
+/* ================= PRINT ================= */
+@media print {
+  .controls { display: none; }
+  .info-box { display: none; }
+  body { margin: 0; }
+  .container { max-width: 100%; }
+}
+
+/* ================= RELATÓRIO + LEGENDA ================= */
+.report-wrapper {
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+}
+
+.report-wrapper > table:first-child {
+  flex: 1;
+}
+
+/* ================= LEGENDA ================= */
+.legend-table {
+  width: 260px;
+  min-width: 260px;
+}
+
+.legend-table td {
+  padding: 6px;
+  font-size: 14px;
+  text-align: left;
+}
+
+.legend-table td:last-child {
+  text-align: center;
+  font-weight: bold;
+}
+
+/* ================= MENU CIRCULAR ================= */
+.menu-circular {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  pointer-events: none;
+  display: none;
+}
+
+.menu-item {
+  width: 50px;
+  height: 50px;
+  background: #28a745;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.25s ease;
+  cursor: pointer;
+  font-size: 16px;
+  pointer-events: auto;
+}
+/* ================= DIALOGO PROBLEMA ================= */
+.problema-dialog {
+  position: fixed;
+  z-index: 10000;
+  width: 320px;
+  max-width: 90vw;
+  transform: translate(-50%, -50%);
+  background: #ffffff;
+  border: 2px solid #c62828;
+  border-radius: 10px;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.2);
+  padding: 12px;
+}
+
+.problema-dialog-title {
+  font-weight: 700;
+  font-size: 14px;
+  color: #222;
+  margin-bottom: 8px;
+}
+
+.problema-dialog-input {
+  width: 100%;
+  min-height: 90px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  padding: 8px;
+  resize: vertical;
+  font-size: 14px;
+  margin: 0;
+}
+
+.problema-dialog-error {
+  color: #b71c1c;
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+.problema-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.problema-btn {
+  border: none;
+  border-radius: 6px;
+  padding: 7px 12px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.problema-btn-cancelar {
+  background: #757575;
+  color: #fff;
+}
+
+.problema-btn-salvar {
+  background: #c62828;
+  color: #fff;
+}
+
+/* ================= LINK PADRAO ================= */
+.padrao-link {
+  color: #0d47a1;
+  text-decoration: underline;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.padrao-link:hover {
+  color: #002171;
+}
+
+/* ================= DIALOGO PADRAO ================= */
+.padrao-dialog {
+  position: fixed;
+  z-index: 10000;
+  width: 320px;
+  max-width: 90vw;
+  transform: translate(-50%, -50%);
+  background: #ffffff;
+  border: 2px solid #0d47a1;
+  border-radius: 10px;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.2);
+  padding: 12px;
+}
+
+.padrao-dialog-title {
+  font-weight: 700;
+  font-size: 14px;
+  color: #222;
+  margin-bottom: 8px;
+}
+
+.padrao-dialog-content {
+  font-size: 13px;
+  color: #333;
+  line-height: 1.4;
+}
+
+.padrao-doc-btn {
+  display: inline-block;
+  background: #0d47a1;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
+.padrao-doc-btn:hover {
+  background: #002171;
+}

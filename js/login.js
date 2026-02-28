@@ -1,59 +1,64 @@
-// ===== TROCAR TELAS =====
-function mostrarLogin() {
-  document.getElementById("areaOperador").style.display = "none";
-  document.getElementById("areaUsuario").style.display = "block";
-}
-
-function voltarOperador() {
-  document.getElementById("areaOperador").style.display = "block";
-  document.getElementById("areaUsuario").style.display = "none";
-}
-
-// ===== OPERADOR =====
+// ===== ENTRAR COMO OPERADOR =====
 function entrarOperador() {
-  const nome = document.getElementById("nomeOperador").value;
-
-  if (!nome) {
-    alert("Informe o nome do operador");
-    return;
-  }
-
-  localStorage.setItem("operador", nome);
-  window.location = "operador.html";
+    const nome = document.getElementById("nomeOperador").value.trim();
+    if (!nome) {
+        console.log("Digite seu nome!");
+        return;
+    }
+    localStorage.setItem("nomeOperador", nome);
+    window.location.href = "operador.html";
 }
 
-// ===== MANUTENÇÃO / GESTÃO =====
-async function login() {
-  const user = document.getElementById("usuario").value;
-  const pass = document.getElementById("senha").value;
+// ===== MOSTRAR LOGIN =====
+function mostrarLogin() {
+    document.getElementById("areaOperador").style.display = "none";
+    document.getElementById("areaUsuario").style.display = "flex";
+}
 
-  if (!user || !pass) {
-    alert("Informe usuário e senha");
-    return;
-  }
+// ===== VOLTAR PARA OPERADOR =====
+function voltarOperador() {
+    document.getElementById("areaUsuario").style.display = "none";
+    document.getElementById("areaOperador").style.display = "flex";
+}
 
-  try {
-    const res = await fetch("usuarios.json");
-    const dados = await res.json();
+// ===== LOGIN DE USUÁRIO COM JSON =====
+async function loginUsuario() {
+    const usuario = document.getElementById("usuario").value.trim();
+    const senha = document.getElementById("senha").value.trim();
 
-    const encontrado = dados.usuarios.find(
-      u => u.usuario === user && u.senha === pass
-    );
-
-    if (!encontrado) {
-      alert("Login inválido");
-      return;
+    if (!usuario || !senha) {
+        console.log("Preencha usuário e senha!");
+        return;
     }
 
-    localStorage.setItem("usuarioLogado", encontrado.tipo);
+    try {
+        const response = await fetch('usuarios.json');
+        if (!response.ok) throw new Error("Erro ao carregar usuários");
+        const data = await response.json();
+        const usuarios = data.usuarios;
 
-    if (encontrado.tipo === "manutencao")
-      window.location = "manutencao.html";
+        const userEncontrado = usuarios.find(u => u.usuario === usuario && u.senha === senha);
 
-    if (encontrado.tipo === "gestao")
-      window.location = "gestao.html";
+        if (userEncontrado) {
+            console.log(`Login bem-sucedido! Bem-vindo, ${usuario}`);
+            localStorage.setItem("usuarioLogado", usuario);
+            localStorage.setItem("tipoUsuario", userEncontrado.tipo);
+            window.location.href = "manutencao.html";
+        } else {
+            console.log("Usuário ou senha incorretos!");
+        }
+    } catch (err) {
+        console.error(err);
+        console.log("Erro ao tentar validar login");
+    }
+}
 
-  } catch {
-    alert("Erro ao carregar usuários");
-  }
+// ===== LOGOUT =====
+function logout() {
+    if (confirm("Deseja sair do sistema?")) {
+        localStorage.removeItem("usuarioLogado");
+        localStorage.removeItem("tipoUsuario");
+        localStorage.removeItem("nomeOperador");
+        window.location.href = "index.html";
+    }
 }

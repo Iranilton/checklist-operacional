@@ -1,0 +1,36 @@
+/* ===== TÍTULO DA PÁGINA ===== */
+.titulo-pagina{
+    color:#dc2626;
+    margin-bottom:20px;
+}
+
+/* ===== LISTA ===== */
+.lista{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+/* ===== ITEM PENDENTE ===== */
+.item{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    border-left:6px solid #ef4444;
+    box-shadow:0 4px 12px rgba(0,0,0,0.06);
+}
+
+/* prioridade alta */
+.alta{
+    border-left-color:#b91c1c;
+}
+
+/* prioridade média */
+.media{
+    border-left-color:#f59e0b;
+}
+
+/* prioridade baixa */
+.baixa{
+    border-left-color:#22c55e;
+}

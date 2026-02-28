@@ -1,0 +1,28 @@
+/* ===== TÍTULO DA PÁGINA ===== */
+.titulo-pagina{
+    color:#16a34a;
+    margin-bottom:20px;
+}
+
+/* ===== LISTA ===== */
+.lista{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+/* ===== ITEM AGENDADO ===== */
+.item{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    border-left:6px solid #22c55e;
+    box-shadow:0 4px 12px rgba(0,0,0,0.06);
+}
+
+/* data */
+.data{
+    color:#6b7280;
+    font-size:14px;
+    margin-top:5px;
+}

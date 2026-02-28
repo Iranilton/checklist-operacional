@@ -34,7 +34,10 @@ function mostrarPendentes() {
 
 function validar(i) {
   const data = document.getElementById(`val_${i}`).value;
-  if (!data) return alert("Escolha data");
+  if (!data) {
+    console.log("Escolha data");
+    return;
+  }
 
   registros[i].status = "validado";
   registros[i].dataValidacao = data;
@@ -45,7 +48,10 @@ function validar(i) {
 
 function agendar(i) {
   const data = document.getElementById(`ag_${i}`).value;
-  if (!data) return alert("Escolha data");
+  if (!data) {
+    console.log("Escolha data");
+    return;
+  }
 
   registros[i].status = "agendado";
   registros[i].dataIntervencao = data;

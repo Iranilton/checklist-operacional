@@ -1,45 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sistema Checklist</title>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/login.css">
 </head>
 
-<body>
+<body class="pagina-login">
 
-<h2>Sistema de Checklist</h2>
-
-<!-- ===== OPERADOR (PADRÃO) ===== -->
-<div id="areaOperador">
-
-<h3>Identificação do Operador</h3>
-
-<input id="nomeOperador" placeholder="Digite seu nome">
-<br><br>
-
-<button onclick="entrarOperador()">Iniciar Checklist</button>
-
-<br><br>
-<button onclick="mostrarLogin()">Login</button>
-
+<!-- TELA OPERADOR -->
+<div id="areaOperador" class="tela">
+    <div class="card">
+        <h2>Sistema Checklist</h2>
+        <input id="nomeOperador" placeholder="Digite seu nome">
+        <button onclick="entrarOperador()">Entrar</button>
+        <button class="btn-secundario" onclick="mostrarLogin()">Login</button>
+    </div>
 </div>
 
-<!-- ===== LOGIN USUÁRIO ===== -->
-<div id="areaUsuario" style="display:none">
-
-
-<input id="usuario" placeholder="Usuário">
-<input id="senha" type="password" placeholder="Senha">
-
-<br><br>
-
-<button onclick="login()">Entrar</button>
-<button onclick="voltarOperador()">Voltar</button>
-
+<!-- TELA LOGIN USUÁRIO -->
+<div id="areaUsuario" class="tela" style="display:none">
+    <div class="card">
+        <h2>Login do Usuário</h2>
+        <input id="usuario" placeholder="Usuário">
+        <input id="senha" type="password" placeholder="Senha">
+        <button onclick="loginUsuario()">Entrar</button>
+        <button onclick="voltarOperador()">Voltar</button>
+    </div>
 </div>
 
 <script src="js/login.js"></script>
-
 </body>
 </html>

@@ -1,0 +1,175 @@
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+/* BASE DO SISTEMA */
+:root{
+    --font-family: "Inter", "Segoe UI", Arial, Helvetica, sans-serif;
+    --text-color: #1f2937;
+    --muted-color: #6b7280;
+    --bg-color: #f5f6fa;
+    --primary-color: #2563eb;
+    --primary-hover: #1d4ed8;
+    --radius: 8px;
+    --container-max: 720px;
+    --base-font-size: 16px;
+}
+
+html{
+    font-size: var(--base-font-size);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+}
+
+body{
+    font-family: var(--font-family);
+    background: var(--bg-color);
+    color: var(--text-color);
+    line-height:1.5;
+    font-size:1rem;
+    padding-top:64px;
+}
+
+/* Tipografia padronizada */
+h1,h2,h3,h4,h5,h6{
+    margin:0 0 .5rem;
+    color:var(--text-color);
+    font-weight:700;
+    line-height:1.2;
+}
+
+h1{font-size:1.75rem}
+h2{font-size:1.25rem}
+h3{font-size:1.125rem}
+p{margin:0 0 .75rem; color:var(--text-color)}
+
+/* garantir herança em formulários e botões */
+input, button, select, textarea{
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+/* HEADER PADRÃO */
+/* HEADER PADRÃO */
+header{
+    background:#1e293b;
+    color:white;
+    padding:0 25px;
+    padding-left:80px;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:64px;
+    z-index:1000;
+}
+
+header h1, header h2 {
+    color: white;
+    margin: 0;
+    font-weight:700;
+}
+
+header h1{font-size:1.25rem}
+
+/* BOTÃO VOLTAR */
+.btn-voltar{
+    position:absolute;
+    left:20px;
+    top:50%;
+    transform:translateY(-50%);
+    background:white;
+    border:1px solid #d1d5db;
+    padding:8px 14px;
+    border-radius:8px;
+    cursor:pointer;
+    color:#1e293b;
+    font-weight:600;
+    z-index:10;
+}
+
+.btn-voltar:hover{
+    background:#e5e7eb;
+}
+
+/* CONTAINER PADRÃO */
+.container{
+    max-width:720px;
+    width:92%;
+    margin:28px auto;
+    padding:20px;
+}
+
+/* INPUT PADRÃO */
+input{
+    width:100%;
+    padding:12px;
+    border-radius:8px;
+    border:1px solid #d1d5db;
+    margin-top:10px;
+}
+
+/* BOTÃO PADRÃO */
+button{
+    padding:12px;
+    border:none;
+    border-radius:var(--radius);
+    background:var(--primary-color);
+    color:white;
+    cursor:pointer;
+}
+
+button:hover{
+    background:var(--primary-hover);
+}
+
+/* Responsividade básica */
+@media (max-width: 600px) {
+    header{
+        padding:16px;
+        justify-content:center;
+        padding-left:56px;
+    }
+
+    .btn-voltar{
+        position:absolute;
+        left:12px;
+        top:50%;
+        transform:translateY(-50%);
+        display:block;
+        margin-bottom:0;
+    }
+
+    .container{
+        margin:16px auto;
+        padding:12px;
+    }
+
+    .card{
+        padding:16px !important;
+    }
+
+    input, button{
+        font-size:16px;
+    }
+}
+
+@media (min-width: 900px) {
+    .container{
+        max-width:900px;
+    }
+}
+
+/* Ajuste fino para telas muito pequenas */
+@media (max-width:420px){
+    html{font-size:15px}
+}

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Folha de Verificação - Yazaki</title>
+    <link rel="stylesheet" href="css/relatorio.css">
+</head>
+<body>
+
+<div class="container">
+    <!-- Painel de Controle -->
+    <div class="controls">
+        <div class="control-group">
+            <label for="selectEquipamento">Equipamento/Ativo</label>
+            <select id="selectEquipamento">
+                <option value="">-- Selecione --</option>
+            </select>
+        </div>
+        
+        <div class="control-group">
+            <label for="selectMes">Mês</label>
+            <select id="selectMes">
+                <option value="01">Janeiro</option>
+                <option value="02" selected>Fevereiro</option>
+                <option value="03">Março</option>
+                <option value="04">Abril</option>
+                <option value="05">Maio</option>
+                <option value="06">Junho</option>
+                <option value="07">Julho</option>
+                <option value="08">Agosto</option>
+                <option value="09">Setembro</option>
+                <option value="10">Outubro</option>
+                <option value="11">Novembro</option>
+                <option value="12">Dezembro</option>
+            </select>
+        </div>
+        
+        <div class="control-group">
+            <label for="selectAno">Ano</label>
+            <select id="selectAno">
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026" selected>2026</option>
+                <option value="2027">2027</option>
+            </select>
+        </div>
+        
+        <div class="btn-group">
+            <button onclick="atualizarRelatorio()">Gerar Relatório</button>
+            <button class="print-btn" onclick="window.print()">Imprimir</button>
+        </div>
+    </div>
+    
+    <div class="info-box" id="infoBox" style="display:none;"></div>
+    
+    <!-- Relatório -->
+    <div class="sheet">
+    <table class="header-table">
+        <tr>
+            <td rowspan="3" style="width: 15%;" class="logo">YAZAKI</td>
+            <td style="width: 12%;" class="bg-gray">Equipamento</td>
+            <td rowspan="3" class="title">FOLHA DE VERIFICAÇÃO DIÁRIA DE MANUTENÇÃO DE 1º NÍVEL</td>
+            <td rowspan="3" style="width: 8%;" class="bg-gray">Máquina</td>
+            <td style="width: 10%;" id="equipCodigo">-</td>
+        </tr>
+        <tr>
+            <td id="equipTipo">-</td>
+            <td id="periodoData">-</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="note-cell">Quando houver algum item fora do especificado anotar na folha de Descrição do Problema (VIDE VERSO).</td>
+        </tr>
+    </table>
+
+    <table>
+        <thead>
+            <tr class="bg-gray">
+                <th class="col-id" rowspan="2">Nº</th>
+                <th class="col-item" rowspan="2">ITEM</th>
+                <th class="col-crit" rowspan="2">CRITÉRIO</th>
+                <th class="col-met" rowspan="2">MÉTODO</th>
+                <th class="col-pad" rowspan="2">PADRÃO</th>
+                <th id="mesAnoHeader" colspan="32">MÊS: FEVEREIRO / 2026</th>
+            </tr>
+            <tr class="bg-gray" id="diasRow">
+                <th class="col-turno">DIA &rarr;</th>
+            </tr>
+        </thead>
+        <tbody id="main-body"></tbody>
+        <tfoot id="footer-body"></tfoot>
+    </table>
+
+        <script>
+            let dadosEquipamentos = null;
+            
+            const nomeMeses = {
+                '01': 'Janeiro', '02': 'Fevereiro', '03': 'Março', '04': 'Abril',
+                '05': 'Maio', '06': 'Junho', '07': 'Julho', '08': 'Agosto',
+                '09': 'Setembro', '10': 'Outubro', '11': 'Novembro', '12': 'Dezembro'
+            };
+
+            const listaPadrao = [
+                {n: 1, item: "Pressão de ar principal", crit: "0,45 - 0,55MPa", met: "Visual", pad: "MED-MC-AC90-001-02"},
+                {n: 2, item: "Pressão da Garra A", crit: "AC-90 A/D/E 0,35 - 0,45MPa", met: "Visual", pad: "MED-MC-AC90-002-03"},
+                {n: 3, item: "Pressão da Garra B", crit: "AC-90 A/D/E 0,45 - 0,55MPa", met: "Visual", pad: "MED-MC-AC90-003-03"},
+                {n: 4, item: "Força da pressão das correias de alimentação do cabo", crit: "AC-90 A/D/E 0,25 - 0,35MPa", met: "Visual", pad: "MED-MC-AC90-004-03"},
+                {n: 5, item: "Força da pressão do rolo de medição", crit: "A marca de coincidência está alinhada.", met: "Visual", pad: "MED-MC-AC90-006-02"},
+                {n: 6, item: "Verificação dos roletes de correção", crit: "Girar sem dificuldade", met: "Ao Toque", pad: "MED-MC-AC90-007-02"},
+                {n: 7, item: "Checagem da rota do cabo", crit: "Sem rebarbas, desgaste, quebra ou danos", met: "Visual", pad: "MED-MC-AC90-008-03"},
+                {n: 8, item: "Checagem do detetor de emendas", crit: "Uma emenda de cabo pode ser detectada", met: "Visual", pad: "MED-MC-AC90-009-02"},
+                {n: 9, item: "Condição do detetor de emenda de cabo", crit: "A máquina deve parar quando a emenda é detectada", met: "Verificação", pad: "MED-MC-AC90-010-02"},
+                {n: 10, item: "Condição detecção desponte lado A/B", crit: "Detectar falha na decapagem no menor cabo", met: "Verificação", pad: "MED-MC-AC90-011-03"},
+                {n: 11, item: "Condição do contador de produto com defeito", crit: "Contar logo após erro de desponte ou cravação", met: "Visual", pad: "MED-MC-AC90-012-02"},
+                {n: 12, item: "Condição do corte e desponte", crit: "Não ter rebarba, filamento cortado ou marcado", met: "Visual/Lupa", pad: "MED-MC-AC90-013-03"},
+                {n: 13, item: "CFM (Verificação da forma de onda exibida)", crit: "Dentro da tolerância da forma da onda padrão", met: "Visual", pad: "MED-MC-AC90-014A-02"},
+                {n: 14, item: "Checagem de detecção de CFM", crit: "CFM tem que detectar o defeito nos testes", met: "Operação", pad: "TCC-YM-AC90-014B-00"},
+                {n: 15, item: "Resíduos de terminais e isolante", crit: "Tubos de saída não devem estar obstruídos", met: "Visual", pad: "MED-MC-AC90-015-02"},
+                {n: 16, item: "Luzes do Andon", crit: "Checar se as luzes estão funcionando", met: "Visual", pad: "TCC-YM-AC90-019-00"},
+                {n: 17, item: "Condição dos Bicos e Pintura", crit: "Estar sem danos e com pintura boa", met: "Visual", pad: "TCC-YM-AC90-020-00"},
+                {n: 18, item: "Limpeza e organização da Máquina", crit: "Sem poeira, resíduo de cabo ou scrap", met: "Visual", pad: "MED-MC-AC90-021-00"},
+                {n: 19, item: "Tubo guia do cabo", crit: "Livre de danos e sujeira", met: "Visual", pad: "TCC-YM-AC90-022-00"},
+                {n: 20, item: "Verificar polia do encoder", crit: "Livre de sujeira", met: "Visual", pad: "TCC-YM-AC90-023-00"},
+                {n: 21, item: "Equipamentos de medição", crit: "Zerando e dentro do prazo de calibração", met: "Visual", pad: "TCC-YM-AC90-024-00"},
+                {n: 22, item: "Proteção principal / alimentação", crit: "Sem partes quebradas ou faltantes", met: "Visual", pad: "TCC-YM-AC90-025-00"},
+                {n: 23, item: "Botoeira de emergência", crit: "Em boas condições / sem danos", met: "Visual", pad: "TCC-YM-AC90-026-00"},
+                {n: 24, item: "Observações Gerais", crit: "Verificar integridade geral", met: "Visual", pad: "-"}
+            ];
+
+            async function carregarDados() {
+                try {
+                    const resp = await fetch('equipamentos.json');
+                    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+                    dadosEquipamentos = await resp.json();
+                    preencherSelectEquipamentos();
+                    atualizarRelatorio();
+                } catch (e) {
+                    console.error('Erro ao carregar dados:', e);
+                    document.getElementById('infoBox').innerHTML = 'Erro ao carregar equipamentos.json';
+                    document.getElementById('infoBox').style.display = 'block';
+                }
+            }
+
+            function preencherSelectEquipamentos() {
+                const select = document.getElementById('selectEquipamento');
+                select.innerHTML = '<option value="">-- Selecione --</option>';
+                if (dadosEquipamentos && dadosEquipamentos.equipamentos) {
+                    dadosEquipamentos.equipamentos.forEach(eq => {
+                        const option = document.createElement('option');
+                        option.value = eq.codigo;
+                        option.textContent = `${eq.codigo} - ${eq.nome}`;
+                        select.appendChild(option);
+                    });
+                    // Seleciona o primeiro equipamento por padrão
+                    if (dadosEquipamentos.equipamentos.length > 0) {
+                        select.value = dadosEquipamentos.equipamentos[0].codigo;
+                    }
+                }
+            }
+
+            function atualizarRelatorio() {
+                const codigoEquipamento = document.getElementById('selectEquipamento').value;
+                const mesValue = document.getElementById('selectMes').value;
+                const anoValue = document.getElementById('selectAno').value;
+                
+                if (!codigoEquipamento) {
+                    document.getElementById('main-body').innerHTML = '<tr><td colspan="37">Selecione um equipamento</td></tr>';
+                    return;
+                }
+
+                // Encontra o equipamento
+                const equipamento = dadosEquipamentos.equipamentos.find(e => e.codigo === codigoEquipamento);
+                if (!equipamento) {
+                    document.getElementById('main-body').innerHTML = '<tr><td colspan="37">Equipamento não encontrado</td></tr>';
+                    return;
+                }
+
+                // Encontra o tipo e modelo
+                const tipo = dadosEquipamentos.tipos.find(t => t.modelos?.some(m => m.id === equipamento.modelo));
+                if (!tipo) {
+                    document.getElementById('main-body').innerHTML = '<tr><td colspan="37">Tipo de equipamento não encontrado</td></tr>';
+                    return;
+                }
+
+                const modelo = tipo.modelos.find(m => m.id === equipamento.modelo);
+                const itens = modelo?.itensRelatorio || listaPadrao;
+
+                // Calcula número de dias no mês
+                const diasNoMes = new Date(anoValue, parseInt(mesValue), 0).getDate();
+                const mesNome = nomeMeses[mesValue];
+
+                // Atualiza header
+                document.getElementById('equipCodigo').textContent = equipamento.codigo;
+                document.getElementById('equipTipo').textContent = tipo.descricao;
+                document.getElementById('periodoData').textContent = mesNome + ' ' + anoValue;
+                document.getElementById('mesAnoHeader').textContent = `MÊS: ${mesNome.toUpperCase()} / ${anoValue}`;
+                document.getElementById('mesAnoHeader').colSpan = 32; // 31 dias + turno
+
+                // Gera header de dias (sempre 31)
+                let headerDias = '';
+                for (let i = 1; i <= 31; i++) {
+                    headerDias += `<th class="col-dia">${i}</th>`;
+                }
+                const diasRow = document.getElementById('diasRow');
+                diasRow.innerHTML = '<th class="col-turno">DIA &rarr;</th>' + headerDias;
+
+                // Preenche tabela com itens (sempre 31 dias)
+                const tbody = document.getElementById('main-body');
+                tbody.innerHTML = itens.map(i => `
+                    <tr>
+                        <td rowspan="2">${i.n}</td>
+                        <td rowspan="2" class="left-align">${i.item}</td>
+                        <td rowspan="2" class="left-align">${i.crit}</td>
+                        <td rowspan="2">${i.met}</td>
+                        <td rowspan="2">${i.pad}</td>
+                        <td class="bg-gray">T-A</td>
+                        ${'<td></td>'.repeat(31)}
+                    </tr>
+                    <tr>
+                        <td class="bg-gray">T-B</td>
+                        ${'<td></td>'.repeat(31)}
+                    </tr>`).join('');
+
+                // Preenche footer com labels (sempre 31 dias)
+                const labels = ["OPERADOR 1º TURNO", "MANUTENÇÃO 1º TURNO", "OPERADOR 2º TURNO", "MANUTENÇÃO 2º TURNO"];
+                const footer = document.getElementById('footer-body');
+                footer.innerHTML = labels.map(l => `
+                    <tr>
+                        <td colspan="5" class="bg-gray" style="text-align:right; padding-right:10px;">${l}</td>
+                        <td class="bg-gray">-</td>
+                        ${'<td></td>'.repeat(31)}
+                    </tr>
+                `).join('');
+            }
+
+            // Event listeners para atualizar relatório quando controles mudarem
+            document.getElementById('selectEquipamento').addEventListener('change', atualizarRelatorio);
+            document.getElementById('selectMes').addEventListener('change', atualizarRelatorio);
+            document.getElementById('selectAno').addEventListener('change', atualizarRelatorio);
+
+            // Carrega dados ao abrir a página
+            window.addEventListener('load', carregarDados);
+        </script>
+    </table>
+
+    <div style="margin-top: 10px; display: flex; justify-content: space-between;">
+        <table style="width: 300px;">
+            <tr class="bg-gray"><td colspan="2">MÉTODO DE INSPEÇÃO / LEGENDA</td></tr>
+            <tr><td>Não utilizado</td><td>—</td></tr>
+            <tr><td>Conforme</td><td>O</td></tr>
+            <tr><td>Não conforme</td><td>X</td></tr>
+            <tr><td>Aguardando correção</td><td>*</td></tr>
+            <tr><td>Corrigido</td><td>(X)</td></tr>
+            <tr><td>Manômetro</td><td>Escrever Valor</td></tr>
+        </table>
+        <div style="margin-left: auto; align-self: flex-end; font-size: 7px;">SGC-FO348 rev00</div>
+    </div>
+</div>
+
+</body>
+</html>
